@@ -1,28 +1,29 @@
 ﻿using System;
+using System.Threading;
 
 namespace Yahtzee
 {
-    class Program
+    internal class Program
     {
-        const int NONE = -1;
-        const int ONES = 0;
-        const int TWOS = 1;
-        const int THREES = 2;
-        const int FOURS = 3;
-        const int FIVES = 4;
-        const int SIXES = 5;
-        const int THREE_OF_A_KIND = 6;
-        const int FOUR_OF_A_KIND = 7;
-        const int FULL_HOUSE = 8;
-        const int SMALL_STRAIGHT = 9;
-        const int LARGE_STRAIGHT = 10;
-        const int CHANCE = 11;
-        const int YAHTZEE = 12;
-        const int SUBTOTAL = 13;
-        const int BONUS = 14;
-        const int TOTAL = 15;
+        private const int NONE = -1;
+        private const int ONES = 0;
+        private const int TWOS = 1;
+        private const int THREES = 2;
+        private const int FOURS = 3;
+        private const int FIVES = 4;
+        private const int SIXES = 5;
+        private const int THREE_OF_A_KIND = 6;
+        private const int FOUR_OF_A_KIND = 7;
+        private const int FULL_HOUSE = 8;
+        private const int SMALL_STRAIGHT = 9;
+        private const int LARGE_STRAIGHT = 10;
+        private const int CHANCE = 11;
+        private const int YAHTZEE = 12;
+        private const int SUBTOTAL = 13;
+        private const int BONUS = 14;
+        private const int TOTAL = 15;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             /*
              * declare variables for the user's scorecard and the computer's scorecard
@@ -59,17 +60,22 @@ namespace Yahtzee
             Console.ReadLine();
         }
 
+        private static void Pause()
+        {
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+        }
+
         #region Scorecard Methods
 
         // sets all of the items in a scorecard to -1 to start the game
         // takes a data structure for a scorecard and the corresponding score card count as parameters.  Both are altered by the method.
-        static void ResetScorecard(/* TODO */)
+        private static void ResetScorecard( /* TODO */)
         {
         }
 
         // calculates the subtotal, bonus and the total for the scorecard
         // takes a data structure for a scorecard as it's parameter
-        static void UpdateScorecard(/* TODO */)
+        private static void UpdateScorecard( /* TODO */)
         {
             /* you can uncomment this code once you declare the parameter
             scorecard[SUBTOTAL] = 0;
@@ -88,13 +94,13 @@ namespace Yahtzee
             */
         }
 
-        static string FormatCell(int value)
+        private static string FormatCell(int value)
         {
-            return (value < 0) ? "" : value.ToString();
+            return value < 0 ? "" : value.ToString();
         }
 
         // takes the data structure for the user's scorecard and the data structure for the computer's scorecard as parameters
-        static void DisplayScoreCards(/* TODO */)
+        private static void DisplayScoreCards( /* TODO */)
         {
             /* you can uncomment this code when you have declared the parameters
             string[] labels = {"Ones", "Twos", "Threes", "Fours", "Fives", "Sixes",
@@ -125,17 +131,19 @@ namespace Yahtzee
             Console.WriteLine(border);
             */
         }
+
         #endregion
 
         #region Rolling Methods
+
         // rolls the specified number of dice and adds them to the data structure for the dice
         // takes an integer that represents the number of dice to roll and a data structure to hold the dice as it's parameters
-        static void Roll(/* TODO */)
+        private static void Roll( /* TODO */)
         {
         }
 
         // takes a data structure that is a set of dice as it's parameter.  Call it dice.
-        static void DisplayDice(/* TODO */)
+        private static void DisplayDice( /* TODO */)
         {
             /* you can uncomment this code when you have declared the parameter
             string lineFormat = "|   {0}  |";
@@ -159,16 +167,17 @@ namespace Yahtzee
             Console.WriteLine();
             */
         }
+
         #endregion
 
         #region Computer Play Methods
 
         // figures out the highest possible score for the set of dice for the computer
         // takes the scorecard datastructure and the set of dice that the computer is keeping as it's parameters
-        static int GetComputerScorecardItem(/* TODO */)
+        private static int GetComputerScorecardItem( /* TODO */)
         {
-            int indexOfMax = 0;
-            int max = 0;
+            var indexOfMax = 0;
+            var max = 0;
 
             /* you can uncomment this code once you've identified the parameters for this method
             for (int i = ONES; i <= YAHTZEE; i++)
@@ -191,7 +200,7 @@ namespace Yahtzee
         // implements the computer's turn.  The computer only rolls once.
         // You can earn extra credit for making the computer play smarter
         // takes the computer's scorecard data structure and scorecard count as parameters.  Both are altered by the method.
-        static void ComputerPlay(/* TODO */)
+        private static void ComputerPlay( /* TODO */)
         {
             /* you can uncomment this code once you declare the parameters
             declare a data structure for the dice that the computer is keeping.  Call it keeping.
@@ -208,18 +217,19 @@ namespace Yahtzee
             cScorecardCount++;
             */
         }
+
         #endregion
 
         #region User Play Methods
 
         // moves the dice that the user want to keep from the rolling data structure to the keeping data structure
         // takes the rolling data structure and the keeping data structure as parameters
-        static void GetKeeping(/* TODO */)
+        private static void GetKeeping( /* TODO */)
         {
         }
 
         // on the last roll moves the dice that the user just rolled into the data structure for the dice that the user is keeping
-        static void MoveRollToKeep(/* TODO */)
+        private static void MoveRollToKeep( /* TODO */)
         {
             // iterate through the rolling data structure and copy each item into the keeping data structure
             // clear the rollling data structure
@@ -229,14 +239,14 @@ namespace Yahtzee
         // must make sure that the scorecard doesn't already have a value for that item
         // remember that the scorecard is initialized with -1 in each item
         // takes a scorecard data structure as it's parameter 
-        static int GetScorecardItem(/* TODO */)
+        private static int GetScorecardItem( /* TODO */)
         {
             return -1;
         }
 
         // implments the user's turn
         // takes the user's scorecard data structure and the user's move count as parameters.  Both will be altered by the method.
-        static void UserPlay(/* TODO */)
+        private static void UserPlay( /* TODO */)
         {
             /*
              * declare a data structure for the dice that the user is rolling
@@ -271,9 +281,9 @@ namespace Yahtzee
         // counts how many of a specified value are in the set of dice
         // takes the value that you're counting and the data structure containing the set of dice as it's parameter
         // returns the count
-        static int Count(/* TODO */)
+        private static int Count( /* TODO */)
         {
-            int count = 0;
+            var count = 0;
 
             return count;
         }
@@ -281,15 +291,15 @@ namespace Yahtzee
         // counts the number of ones, twos, ... sixes in the set of dice
         // takes a data structure for a set of dice as it's parameter
         // returns a data structure that contains the count for each dice value
-        static /* TODO */ void GetCounts(/* TODO */)
+        private static /* TODO */ void GetCounts( /* TODO */)
         {
         }
 
         // adds the value of all of the dice based on the counts
         // takes a data structure that represents all of the counts as a parameter
-        static int Sum(/* TODO */)
+        private static int Sum( /* TODO */)
         {
-            int sum = 0;
+            var sum = 0;
             /* you can uncomment this code once you have declared the parameter
             for (int i = ONES; i <= SIXES; i++)
             {
@@ -302,7 +312,7 @@ namespace Yahtzee
 
         // determines if you have a specified count based on the counts
         // takes a data structure that represents all of the counts as a parameter
-        static bool HasCount(/* TODO */)
+        private static bool HasCount( /* TODO */)
         {
             /* you can uncomment this when you declare the parameter
             foreach (int count in counts)
@@ -314,14 +324,14 @@ namespace Yahtzee
 
         // chance is the sum of the dice
         // takes a data structure that represents all of the counts as a parameter
-        static int ScoreChance(/* TODO */)
+        private static int ScoreChance( /* TODO */)
         {
             return 0;
         }
 
         // calculates the score for ONES given the set of counts (from GetCounts)
         // takes a data structure that represents all of the counts as a parameter
-        static int ScoreOnes(/* TODO */)
+        private static int ScoreOnes( /* TODO */)
         {
             // you can comment out this line when you have declared the parameters
             // return counts[ONES] * 1;
@@ -333,7 +343,7 @@ namespace Yahtzee
         // scores 3 of a kind.  4 of a kind or 5 of a kind also can be used for 3 of a kind
         // the sum of the dice are used for the score
         // takes a data structure that represents all of the counts as a parameter
-        static int ScoreThreeOfAKind(/* TODO */)
+        private static int ScoreThreeOfAKind( /* TODO */)
         {
             return 0;
         }
@@ -341,7 +351,7 @@ namespace Yahtzee
         // WRITE ALL OF THESE: ScoreFourOfAKind, ScoreYahtzee - a yahtzee is worth 50 points
 
         // takes a data structure that represents all of the counts as a parameter
-        static int ScoreFullHouse(/* TODO */)
+        private static int ScoreFullHouse( /* TODO */)
         {
             /* you can uncomment this code once you declare the parameter
             if (HasCount(2, counts) && HasCount(3, counts))
@@ -349,11 +359,10 @@ namespace Yahtzee
             else
             */
             return 0;
-
         }
 
         // takes a data structure that represents all of the counts as a parameter
-        static int ScoreSmallStraight(/* TODO */)
+        private static int ScoreSmallStraight( /* TODO */)
         {
             /* you can uncomment this code once you declare the parameter
             for (int i = THREES; i <= FOURS; i++)
@@ -371,7 +380,7 @@ namespace Yahtzee
         }
 
         // takes a data structure that represents all of the counts as a parameter
-        static int ScoreLargeStraight(/* TODO */)
+        private static int ScoreLargeStraight( /* TODO */)
         {
             /* you can uncomment this code once you declare the parameter
             for (int i = TWOS; i <= FIVES; i++)
@@ -388,7 +397,7 @@ namespace Yahtzee
 
         // scores a score card item based on the set of dice
         // takes an integer which represent the scorecard item as well as a data structure representing a set of dice as parameters
-        static int Score(/* TODO */)
+        private static int Score( /* TODO */)
         {
             /* you can uncomment this code once you declare the parameter
             int[] counts = GetCounts(dice);
@@ -428,10 +437,5 @@ namespace Yahtzee
         }
 
         #endregion
-
-        static void Pause()
-        {
-            System.Threading.Thread.Sleep(TimeSpan.FromSeconds(2));
-        }
     }
 }
