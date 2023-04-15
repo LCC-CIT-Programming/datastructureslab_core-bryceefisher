@@ -7,13 +7,12 @@ namespace BinaryNumbersQueue
     {
         private static void Main(string[] args)
         {
-            Queue<string> binaryQueue = new Queue<string>();
-            
+            var binaryQueue = new Queue<string>();
+
             DisplayBinary(GetUserInput(), binaryQueue);
-            
         }
 
-        static int GetUserInput()
+        private static int GetUserInput()
         {
             Console.Write("Enter a positive number and the program will print all binary numbers up to that number: ");
 
@@ -27,14 +26,14 @@ namespace BinaryNumbersQueue
             return userInput;
         }
 
-        static void DisplayBinary(int userInput, Queue<string> binaryQueue)
+        private static void DisplayBinary(int userInput, Queue<string> binaryQueue)
         {
             binaryQueue.Enqueue("1");
-            
-            for (int i = 0; i < userInput; i++)
+
+            for (var i = 0; i < userInput; i++)
             {
-                Console.WriteLine($"{i+1}: {binaryQueue.Peek()}");
-                string s1 = binaryQueue.Dequeue();
+                Console.WriteLine($"{i + 1}: {binaryQueue.Peek()}");
+                var s1 = binaryQueue.Dequeue();
                 binaryQueue.Enqueue(s1 + "0");
                 binaryQueue.Enqueue(s1 + "1");
             }
