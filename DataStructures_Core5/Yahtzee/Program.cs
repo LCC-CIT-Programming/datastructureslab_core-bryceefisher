@@ -10,13 +10,13 @@ namespace Yahtzee
         private static void Main(string[] args)
         {
             //declare variables for the user's scorecard and the computer's scorecard
-            var userScorecard = new int[16];
-            var computerScorecard = new int[16];
+            int[] userScorecard = new int[16];
+            int[] computerScorecard = new int[16];
             //declare a variable for the number of turns the user has taken and another for the number of moves the computer has taken
-            var userMoves = 0;
-            var computerMoves = 0;
+            int userMoves = 0;
+            int computerMoves = 0;
             //declare a boolean that knows if it is the user's turn and set it to false
-            var userTurn = false;
+            bool userTurn = false;
             // call ResetScorecard for the user
             ResetScorecard(userScorecard, ref userMoves);
             // call ResetScorecard for the computer
@@ -86,7 +86,7 @@ namespace Yahtzee
         // takes a data structure for a scorecard and the corresponding score card count as parameters.  Both are altered by the method.
         private static void ResetScorecard(int[] scorecard, ref int count)
         {
-            for (var i = 0; i < 16; i++) scorecard[i] = -1;
+            for (int i = 0; i < 16; i++) scorecard[i] = -1;
 
             count = 0;
         }
@@ -98,7 +98,7 @@ namespace Yahtzee
             //you can uncomment this code once you declare the parameter
             scorecard[13] = 0;
             scorecard[14] = 0;
-            for (var i = 0; i <= 5; i++)
+            for (int i = 0; i <= 5; i++)
                 if (scorecard[i] != -1)
                     scorecard[13] += scorecard[i];
 
@@ -106,7 +106,7 @@ namespace Yahtzee
                 scorecard[14] = 35;
 
             scorecard[15] = scorecard[13] + scorecard[14];
-            for (var i = 6; i <= 12; i++)
+            for (int i = 6; i <= 12; i++)
                 if (scorecard[i] != -1)
                     scorecard[15] += scorecard[i];
         }
@@ -126,14 +126,14 @@ namespace Yahtzee
                 "3 of a Kind", "4 of a Kind", "Full House", "Small Straight", "Large Straight",
                 "Chance", "Yahtzee", "Sub Total", "Bonus", "Total Score"
             };
-            var lineFormat = "| {3,2} {0,-15}|{1,8}|{2,8}|";
-            var border = new string('-', 39);
+            string lineFormat = "| {3,2} {0,-15}|{1,8}|{2,8}|";
+            string border = new string('-', 39);
 
             Console.Clear();
             Console.WriteLine(border);
             Console.WriteLine(lineFormat, "", "  You   ", "Computer", "");
             Console.WriteLine(border);
-            for (var i = 0; i <= 5; i++)
+            for (int i = 0; i <= 5; i++)
                 Console.WriteLine(lineFormat, labels[i], FormatCell(uScorecard[i]), FormatCell(cScorecard[i]), i);
 
             Console.WriteLine(border);
@@ -141,7 +141,7 @@ namespace Yahtzee
             Console.WriteLine(border);
             Console.WriteLine(lineFormat, labels[14], FormatCell(uScorecard[14]), FormatCell(cScorecard[14]), "");
             Console.WriteLine(border);
-            for (var i = 6; i <= 12; i++)
+            for (int i = 6; i <= 12; i++)
                 Console.WriteLine(lineFormat, labels[i], FormatCell(uScorecard[i]), FormatCell(cScorecard[i]), i);
 
             Console.WriteLine(border);
@@ -157,8 +157,8 @@ namespace Yahtzee
         // takes an integer that represents the number of dice to roll and a data structure to hold the dice as it's parameters
         private static void Roll(int numDice, List<int> dice)
         {
-            var gen = new Random();
-            for (var i = 0; i < numDice; i++)
+             Random gen = new Random();
+            for (int i = 0; i < numDice; i++)
                 dice.Add(gen.Next(1, 7));
         }
 
@@ -166,23 +166,23 @@ namespace Yahtzee
         private static void DisplayDice(List<int> dice)
         {
             //you can uncomment this code when you have declared the parameter
-            var lineFormat = "|   {0}  |";
-            var border = "*------*";
-            var second = "|      |";
+            string lineFormat = "|   {0}  |";
+            string border = "*------*";
+            string second = "|      |";
 
-            foreach (var d in dice)
+            foreach (int d in dice)
                 Console.Write(border);
             Console.WriteLine();
             // foreach (var d in dice)
             //     Console.Write(second);
             // Console.WriteLine("");
-            foreach (var d in dice)
+            foreach (int d in dice)
                 Console.Write(lineFormat, d);
             Console.WriteLine();
             // foreach (var d in dice)
             //     Console.Write(second);
             // Console.WriteLine("");
-            foreach (var d in dice)
+            foreach (int d in dice)
                 Console.Write(border);
             Console.WriteLine();
         }
@@ -203,16 +203,16 @@ namespace Yahtzee
                 "Chance", "Yahtzee"
             };
             //create an integer variable to hold the index of the highest score
-            var indexOfMax = 0;
+            int indexOfMax = 0;
             //create an integer variable to hold the highest score
-            var max = 0;
+            int max = 0;
 
             //you can uncomment this code once you've identified the parameters for this method
-            for (var i = 0; i <= 12; i++)
+            for (int i = 0; i <= 12; i++)
                 if (scorecard[i] == -1)
                 {
                     //call the Score method to get the score for the current item
-                    var score = Score(keeping, i);
+                    int score = Score(keeping, i);
                     //if the score is greater than the current max, 
                     if (score >= max)
                     {
@@ -233,9 +233,9 @@ namespace Yahtzee
             //sort the data structure
             rolling.Sort();
             //create an integer variable to hold the number of consecutive dice
-            var count = 0;
+            int count = 0;
             //loop through the data structure
-            for (var i = 0; i < rolling.Count - 1; i++)
+            for (int i = 0; i < rolling.Count - 1; i++)
             {
                 //if the current die is one less than the next die increase the count
                 if (rolling[i] == rolling[i + 1] - 1) count++;
@@ -251,7 +251,7 @@ namespace Yahtzee
             //sort the data structure
             rolling.Sort();
             //loop through the data structure
-            for (var i = 0; i < rolling.Count - 1; i++)
+            for (int i = 0; i < rolling.Count - 1; i++)
                 //if the current die is not one less than the next die, return false
                 if (rolling[i] != rolling[i + 1] - 1)
                 {return false;}
@@ -276,7 +276,7 @@ namespace Yahtzee
                 //add rolling to keeping
                 keeping.AddRange(rolling);
                 //loop through keeping
-                for (var i = 0; i < keeping.Count - 1; i++)
+                for (int i = 0; i < keeping.Count - 1; i++)
                     //if the current die is the same as the next die, remove the current die
                     if (keeping[i] == keeping[i + 1])
                         keeping.Remove(keeping[i]);
@@ -287,11 +287,11 @@ namespace Yahtzee
             else
             {
                 //loop through rolling
-                for (var i = 0; i < rolling.Count; i++)
+                for (int i = 0; i < rolling.Count; i++)
                 {
                     //count the number of times the current die is in rolling and keeping
-                    var rollingCount = rolling.Count(x => x == rolling[i]);
-                    var keepingCount = keeping.Count(x => x == rolling[i]);
+                    int rollingCount = rolling.Count(x => x == rolling[i]);
+                    int keepingCount = keeping.Count(x => x == rolling[i]);
                     //if the current die is in rolling 2 or more times or in keeping 1 or more times, add it to keeping
                     if (rollingCount >= 2 || keepingCount >= 1) keeping.Add(rolling[i]);
                 }
@@ -307,18 +307,18 @@ namespace Yahtzee
         private static void ComputerPlay(int[] cScorecard, ref int cScorecardCount)
         {
             //declare a data structure for the dice that the computer is rolling. 
-            var rolling = new List<int>();
+            List<int> rolling = new List<int>();
             //declare a data structure for the dice that the computer is keeping.  Call it keeping.
-            var keeping = new List<int>();
+            List<int> keeping = new List<int>();
             //declare an integer to hold the index of the scorecard item that the computer is scoring.  
-            var itemIndex = -1;
+            int itemIndex = -1;
             //delcare an integer to hold the number of rolls.  
-            var numRolls = 0;
+            int numRolls = 0;
             // Do while the number of rolls < 3 and the number of dice the computer is keeping is < 5
             do
             {
                 //declare an integer to hold the number of dice to roll.  Call it diceToRoll
-                var diceToRoll = 5 - keeping.Count;
+                int diceToRoll = 5 - keeping.Count;
                 //Call Roll passing the number of dice to roll and the data structure for the dice that the computer is rolling
                 Roll(diceToRoll, rolling);
                 //increment the number of rolls
@@ -364,11 +364,11 @@ namespace Yahtzee
         {
             int userChoice;
             bool isint;
-            var udice = 0;
+            int udice = 0;
             do
             {
                 Console.Write($"Do you want to keep dice: #{udice + 1}? y/n ");
-                var userinput = Console.ReadLine();
+                string userinput = Console.ReadLine();
                 if (userinput == "y") keeping.Add(rolling[udice]);
 
                 udice++;
@@ -381,7 +381,7 @@ namespace Yahtzee
         private static void MoveRollToKeep(List<int> rolling, List<int> keeping)
         {
             // iterate through the rolling data structure and copy each item into the keeping data structure
-            for (var i = 0; i < rolling.Count; i++) keeping.Add(rolling[i]);
+            for (int i = 0; i < rolling.Count; i++) keeping.Add(rolling[i]);
 
             rolling.Clear();
         }
@@ -392,7 +392,7 @@ namespace Yahtzee
         // takes a scorecard data structure as it's parameter 
         private static int GetScorecardItem(int[] scorecard)
         {
-            var itemIndex = -1;
+            int itemIndex = -1;
             do
             {
                 Console.Write("Which item do you want to score? ");
@@ -407,19 +407,19 @@ namespace Yahtzee
         private static void UserPlay(int[] uScorecard, ref int userMoves)
         {
             //declare a data structure for the dice that the user is rolling
-            var userRoll = new List<int>();
+            List<int> userRoll = new List<int>();
             //declare a data structure for the dice that the user is keeping
-            var userKeep = new List<int>();
+            List<int> userKeep = new List<int>();
 
             //declare a variable for the number of rolls
-            var numRolls = 0;
+            int numRolls = 0;
             //declare a variable for the scorecard item that the user wants to score on this turn
             int scorecardItem;
 
             //do
             do
             {
-                var diceToRoll = 5 - userKeep.Count;
+                int diceToRoll = 5 - userKeep.Count;
                 //Call Roll
                 Roll(diceToRoll, userRoll);
                 //increment the number of rolls
@@ -461,8 +461,8 @@ namespace Yahtzee
         // returns the count
         private static int Count(int value, List<int> dice)
         {
-            var count = 0;
-            foreach (var num in dice)
+            int count = 0;
+            foreach (int num in dice)
                 if (num == value)
                     count++;
 
@@ -474,10 +474,10 @@ namespace Yahtzee
         // returns a data structure that contains the count for each dice value
         private static List<int> GetCounts(List<int> dice)
         {
-            var numCounts = new List<int>();
-            for (var i = 1; i < 7; i++)
+            List<int> numCounts = new List<int>();
+            for (int i = 1; i < 7; i++)
             {
-                var num = Count(i, dice);
+                int num = Count(i, dice);
                 numCounts.Add(num);
             }
 
@@ -488,9 +488,9 @@ namespace Yahtzee
         // takes a data structure that represents all of the counts as a parameter
         private static int Sum(List<int> count)
         {
-            var sum = 0;
+            int sum = 0;
             // you can uncomment this code once you have declared the parameter
-            for (var i = 1; i < 7; i++)
+            for (int i = 1; i < 7; i++)
             {
                 sum += i * count[i - 1];
             }
@@ -503,7 +503,7 @@ namespace Yahtzee
         private static bool HasCount(List<int> counts, int howMany)
         {
             //you can uncomment this when you declare the parameter
-            foreach (var count in counts)
+            foreach (int count in counts)
                 if (howMany == count)
                     return true;
 
@@ -602,7 +602,7 @@ namespace Yahtzee
         private static int ScoreSmallStraight(List<int> counts)
         {
             //you can uncomment this code once you declare the parameter
-            for (var i = 2; i <= 3; i++)
+            for (int i = 2; i <= 3; i++)
                 if (counts[i] == 0)
                     return 0;
 
@@ -617,7 +617,7 @@ namespace Yahtzee
         private static int ScoreLargeStraight(List<int> counts)
         {
             //you can uncomment this code once you declare the parameter
-            for (var i = 1; i <= 4; i++)
+            for (int i = 1; i <= 4; i++)
                 if (counts[i] == 0)
                     return 0;
 
@@ -631,7 +631,7 @@ namespace Yahtzee
         private static int Score(List<int> dice, int whichElement)
         {
             //you can uncomment this code once you declare the parameter
-            var counts = GetCounts(dice);
+            List<int> counts = GetCounts(dice);
             switch (whichElement)
             {
                 case 0:
